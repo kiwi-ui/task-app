@@ -12,17 +12,19 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 		isLoading(!loading)
-    try {
+  
+		try {
       const response = await axios.post('https://todo-api-18-140-52-65.rakamin.com/auth/login', { email, password });
 			console.log(response)
-			const authToken = response.data.authToken
+			const authToken = response.data.auth_token
 			localStorage.setItem('token', authToken);
       isLoading(!loading)
 			navigate('/v1');
-    } catch (error) {
+		} catch (error) {
       setError('Invalid email or password. Please try again.');
     }
   };
+
 	return (
     <>
       <main className="d-flex flex-column justify-content-center align-items-center vh-100 bg-light">
