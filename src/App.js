@@ -1,7 +1,7 @@
-import './App.css';
 import LoginPage from './pages/LoginPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import TaskApp from './pages/TaskApp';
+
 function App() {
 
   return (
