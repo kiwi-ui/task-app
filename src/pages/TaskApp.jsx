@@ -62,8 +62,8 @@ const TaskApp = () => {
 
     return classifiedTasks;
   };
-
   const classifiedTasks = classifyTasks()
+
   return (
     <>
       <div className="border-bottom border-2 py-2 d-flex gap-1 align-items-center">
@@ -73,9 +73,13 @@ const TaskApp = () => {
           <span>Add New Group</span>
         </button>
       </div>
+
       <div className="d-flex flex-row flex-wrap">
         { Object.values(classifiedTasks).map(({ board, tasks }) => (
-          <Board key={ board?.id } title={ board?.title } description={ board?.description }>
+          <Board 
+            key={ board?.id } 
+            title={ board?.title } 
+            description={ board?.description }>
             { tasks.map((task) => (
               <TaskCard key={ task.id } name={ task.name } percentage={ task.progress_percentage }/>
           ))}
