@@ -3,7 +3,7 @@ import { getBoard } from '../services/boardService';
 import { AiOutlinePlus, AiOutlinePlusCircle } from 'react-icons/ai'
 import { getTask } from '../services/taskService';
 import {BsThreeDots} from 'react-icons/bs'
-
+import Board from '../components/Board/Board';
 const TaskApp = () => {
 	const [boards, setBoards] = useState([])
 	const [tasks, setTasks] = useState([])
@@ -30,7 +30,7 @@ const TaskApp = () => {
 		try {
 			const { data } = await getTask();
 			console.log(data)
-			setTasks(data);
+			setTasks(data.slice(0,15));
 		}
 
 		catch (error) {
@@ -48,7 +48,7 @@ const TaskApp = () => {
 
     tasks.forEach((task) => {
       const board = getRandomBoard();
-      const boardId = board.id;
+      const boardId = board?.id;
 
       if (!classifiedTasks[boardId]) {
         classifiedTasks[boardId] = {
@@ -75,22 +75,8 @@ const TaskApp = () => {
       </div>
 
       <div className="d-flex flex-row flex-wrap">
-      <div className="d-flex flex-row flex-wrap">
         {Object.values(classifiedTasks).map(({ board, tasks }) => (
-          <div key={board.id} className="m-3 p-2 border-2 border-black bg-info w-25">
-            <div className="container">
-              <p className="p-1 rounded-1 border border-primary">{board.title}</p>
-              <p className="w-100">{board.description}</p>
-
-              {tasks.map((task) => (
-                <div key={task.id}>{task.name}</div>
-              ))}
-
-              <a href="__blank" className="d-flex align-items-center mt-2 gap-1">
-                <AiOutlinePlusCircle /> <span>New Task</span>
-              </a>
-            </div>
-          </div>
+          <Board key={ board.id } title={ board.title } description={ board.description } />
         ))}
       </div>
 
@@ -115,7 +101,6 @@ const TaskApp = () => {
               </div> */}
 
 
-      </div>
     </>
   );
 }
