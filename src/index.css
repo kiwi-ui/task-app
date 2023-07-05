@@ -1,1 +1,30 @@
-* { box-sizing: border-box; }
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz@6..12&display=swap');
+* { 
+    box-sizing: border-box;
+    font-family: 'Nunito Sans', sans-serif;
+}
+:root {
+    --primary-main: #01959F;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+.bg-primary-main {
+    background-color: var(--primary-main);
+}
+.fs-heading {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+}
+.fs-btn-heading {
+    font-size: 12px;
+    padding: 4px 16px;
+    gap: 4px;
+    border-radius: 8px;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.12);
+}
+.status {
+    border-top: 2px dashed black;
+}
