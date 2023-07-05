@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { getBoard } from '../services/boardService';
 import { AiOutlinePlus, AiOutlinePlusCircle } from 'react-icons/ai'
 import { getTask } from '../services/taskService';
-import {BsThreeDots} from 'react-icons/bs'
 import Board from '../components/Board/Board';
+import TaskCard from '../components/taskCard/TaskCard';
 const TaskApp = () => {
 	const [boards, setBoards] = useState([])
 	const [tasks, setTasks] = useState([])
@@ -73,34 +73,15 @@ const TaskApp = () => {
           <span>Add New Group</span>
         </button>
       </div>
-
       <div className="d-flex flex-row flex-wrap">
-        {Object.values(classifiedTasks).map(({ board, tasks }) => (
-          <Board key={ board.id } title={ board.title } description={ board.description } />
-        ))}
+        { Object.values(classifiedTasks).map(({ board, tasks }) => (
+          <Board key={ board?.id } title={ board?.title } description={ board?.description }>
+            { tasks.map((task) => (
+              <TaskCard key={ task.id } name={ task.name } percentage={ task.progress_percentage }/>
+          ))}
+          </Board>
+        )) }
       </div>
-
-              {/* <div className="bg-danger-subtle p-3">
-                <p>Re-designed the zero-g doggie bags. No more spills!</p>
-
-                <div className="status d-flex flex-row align-items-center gap-1 pt-3">
-                  <div class="progress w-100">
-                    <div
-                      className={`progress-bar bg-succes w-25`}
-                      role="progressbar"
-                      aria-valuenow="25"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-
-                  <a href="blank">
-                    <BsThreeDots />
-                  </a>
-                </div>
-              </div> */}
-
-
     </>
   );
 }
