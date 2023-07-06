@@ -1,0 +1,11 @@
+.list-group-item:hover .option-icon,
+.list-group-item:active .option-icon {
+  color: #01959F;
+  cursor: pointer;
+}
+
+.list-group-item:hover .option-text,
+.list-group-item:active .option-text {
+  color: #01959F;
+  cursor: pointer;
+}

@@ -4,6 +4,9 @@ import { AiOutlinePlus, AiOutlinePlusCircle } from 'react-icons/ai'
 import { getTask } from '../services/taskService';
 import Board from '../components/Board/Board';
 import TaskCard from '../components/taskCard/TaskCard';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 const TaskApp = () => {
 	const [boards, setBoards] = useState([])
 	const [tasks, setTasks] = useState([])
@@ -73,7 +76,7 @@ const TaskApp = () => {
           <span>Add New Group</span>
         </button>
       </div>
-
+      <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
       <div className="d-flex flex-row flex-wrap">
         { Object.values(classifiedTasks).map(({ board, tasks }) => (
           <Board 
