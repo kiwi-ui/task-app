@@ -1,6 +1,6 @@
 import React from 'react'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
-
+import './index.css'
 const Board = ({ title, description, children }) => {
   const getRandomColor = () => {
     const r = Math.floor(Math.random() * 256);
@@ -20,11 +20,13 @@ const Board = ({ title, description, children }) => {
           <p className="p-1 rounded-1 border-1 w-fit" style={ randomColors }>{title}</p>
           <p className="w-100 text-black fw-bold">{description}</p>
       </div>
+      
       { children }
+
       <div className='container text-black'>
-          <a href="__blank" className="d-flex align-items-center mt-2 gap-1">
+          <button className="d-flex align-items-center mt-2 gap-1 rounded-3 border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#exampleModal">
               <AiOutlinePlusCircle /> <span>New Task</span>
-          </a>
+          </button>
       </div>
     </div>
   )
