@@ -25,12 +25,7 @@ const Board = ({ title, description, children, getIndex }) => {
       {children}
 
       <div className='container text-black'>
-        <button
-          className="d-flex align-items-center mt-2 gap-1 rounded-3 border-0 bg-transparent"
-          onClick={getIndex}
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-        >
+        <button className="d-flex align-items-center mt-2 gap-1 rounded-3 border-0 bg-transparent" onClick={getIndex} data-bs-toggle="modal" data-bs-target="#exampleModal">
           <AiOutlinePlusCircle /> <span>New Task</span>
         </button>
       </div>
