@@ -65,8 +65,10 @@ const TaskCard = ({ name, percentage, getID }) => {
         
         <div>
           <button ref={buttonRef} type="button" className="btn btn-lg btn" onClick={ getID }>
-          <BsThreeDots />
-          </button>{isPopoverVisible && (
+            <BsThreeDots />
+          </button>
+          
+          {isPopoverVisible && (
             <div ref={popoverRef} className="w-100" style={{ zIndex: 100 }}>
               {renderPopoverContent()}
             </div>

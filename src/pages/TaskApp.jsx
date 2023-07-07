@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getBoard, postBoard } from "../services/boardService";
-import { getTask, postTask } from "../services/taskService";
+import { deleteTask, getTask, postTask } from "../services/taskService";
 import Board from "../components/Board/Board";
 import TaskCard from "../components/taskCard/TaskCard";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -49,27 +49,37 @@ const TaskApp = () => {
       id: Math.floor(Math.random()),
       title: newBoardsTitle,
       updated_at: null,
-    }
+    };
     postBoard(newBoard)
-    setBoards([...boards, newBoard]);
-    setNewBoardsTitle("")
-    setNewBoardsDesc("")
+      .then(() => {
+        postBoard(newBoard);
+        setBoards([...boards, newBoard]);
+        setNewBoardsTitle("");
+        setNewBoardsDesc("");
+      })
+      .catch((error) => console.log(error))
   }
 
   const addNewTask = () => {
+    
     const newTask = {
       created_at: new Date().toISOString(),
       done: null,
       id: Math.floor(Math.random() * 1000),
       name: newTaskName,
-      progress_percentage: newTaskProgress.slice(0, 2),
+      progress_percentage: newTaskProgress.slice(0, setNewTaskProgress.length+1),
       todo_id: selectedBoardIndex,
       updated_at: null,
     };
     postTask(newTask)
-    setTasks([...tasks, newTask]);
-    setNewTaskName("");
-    setNewTaskProgress("");
+      .then(() => {
+        setTasks([...tasks, newTask]);
+        setNewTaskName("");
+        setNewTaskProgress("");
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   };
 
   const handleBoardClick = (index) => {
@@ -78,9 +88,19 @@ const TaskApp = () => {
   const selectTaskID = (selectedId) => {
     setSelectedTaskID(selectedId);
   };
-  const deleteTask = () => {
-    setTasks(tasks.filter((task) => task.id !== selectedTaskID ))
-    setSelectedTaskID(null)
+  const removeSelectedTask = () => {
+    const deletedTask = tasks.find((task) => task.id === selectedTaskID);
+  
+    if (deletedTask) {
+      deleteTask(deletedTask.id)
+        .then(() => {
+          setTasks(tasks.filter((task) => task.id !== selectedTaskID));
+          setSelectedTaskID(null);
+        })
+        .catch((error) => {
+          console.log('Error deleting task:', error);
+        });
+    }
   };
 
   return (
@@ -112,6 +132,7 @@ const TaskApp = () => {
           ))}
       </div>
       
+      {/* ModalAddNewBoard */}
       <div className="modal fade" id="AddBoardModal" tabIndex="-1"  aria-hidden="true">
           <div className="modal-dialog modal-dialog-centered">
               <div className="modal-content">
@@ -142,6 +163,7 @@ const TaskApp = () => {
           </div>
       </div>
       
+      {/* DeletTask */}
       <div className="modal fade" id="DeleteTask" tabIndex="-1"  aria-hidden="true">
           <div className="modal-dialog modal-dialog-centered">
               <div className="modal-content container">
@@ -156,12 +178,12 @@ const TaskApp = () => {
 
                   <div className="modal-footer border-0">
                       <button type="button" className="border-0 p-2 rounded-1 bg-white fw-semibold border-2 border-black pointer" data-bs-dismiss="modal">Cancel</button>
-                      <button type="button" className="border-0 p-2 rounded-1 bg-danger text-white px-3 pointer" onClick={ deleteTask } data-bs-dismiss="modal">Delete</button>
+                      <button type="button" className="border-0 p-2 rounded-1 bg-danger text-white px-3 pointer" onClick={ removeSelectedTask } data-bs-dismiss="modal">Delete</button>
                   </div>
               </div>
           </div>
       </div>
-
+      
       <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog modal-dialog-centered">
               <div className="modal-content">
