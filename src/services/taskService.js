@@ -9,3 +9,6 @@ export const postTask = (newTask) => {
 export const deleteTask = (taskID) => {
     return AxiosInstance.delete(`todos/1/items/${ taskID }`)
 }
+export const updateTask = (taskID) => {
+    return AxiosInstance.put(`/todos/1/items/${ taskID }`)
+}
