@@ -17,6 +17,7 @@ const TaskApp = () => {
   const [newTaskProgress, setNewTaskProgress] = useState("");
   const [selectedTaskID, setSelectedTaskID] = useState("");
   const [newTaskUpdateDate, setNewTaskUpdateDate] = useState("");
+  const [taskTodoID, setTaskTodoID] = useState(null);
 
   useEffect(() => {
     fetchBoards();
@@ -67,7 +68,7 @@ const TaskApp = () => {
       done: null,
       id: Math.floor(Math.random() * 1000),
       name: newTaskName,
-      progress_percentage: newTaskProgress.slice(0, setNewTaskProgress.length+1),
+      progress_percentage: newTaskProgress.pop(),
       todo_id: selectedBoardIndex,
       updated_at: null,
     };
@@ -76,6 +77,7 @@ const TaskApp = () => {
         setTasks([...tasks, newTask]);
         setNewTaskName("");
         setNewTaskProgress("");
+        console.log(newTask)
       })
       .catch((error) => {
         console.log(error)
@@ -84,13 +86,17 @@ const TaskApp = () => {
 
   const handleBoardClick = (index) => {
     setSelectedBoardIndex(index);
+    console.log(selectedBoardIndex)
   };
 
-  const selectTaskID = (id, name, progress, updateDate) => {
+  const selectTaskID = (id, name, progress, updateDate, todoid, index) => {
     setSelectedTaskID(id);
     setNewTaskName(name);
     setNewTaskProgress(progress);
     setNewTaskUpdateDate(updateDate);
+    setTaskTodoID(todoid)
+    setSelectedBoardIndex(index)
+
   };
 
   const removeSelectedTask = () => {
@@ -136,16 +142,59 @@ const TaskApp = () => {
     }
   };
   
+  const moveTaskToLeft = () => {
+    const selectedTaskToMove = tasks.find((task) => task.id === selectedTaskID)
+
+    const updatedTaskData = {
+      ...selectedTaskToMove,
+      todo_id: selectedTaskToMove.todo_id,
+    };
+
+    if(updatedTaskData.todo_id === 0) {
+      updatedTaskData.todo_id = boards.length-1
+    } else {
+      updatedTaskData.todo_id = selectedTaskToMove.todo_id - 1
+    }
+
+    setTasks((prevTasks) =>
+    prevTasks.map((task) =>
+      task.id === selectedTaskID ? updatedTaskData : task
+    ))
+  }
+  
+  const moveTaskToRight = () => {
+    const selectedTaskToMove = tasks.find((task) => task.id === selectedTaskID)
+
+    const updatedTaskData = {
+      ...selectedTaskToMove,
+      todo_id: selectedTaskToMove.todo_id,
+    };
+
+    if(updatedTaskData.todo_id === boards.length-1) {
+      updatedTaskData.todo_id = 0
+    } else {
+      updatedTaskData.todo_id = selectedTaskToMove.todo_id + 1
+    }
+
+    setTasks((prevTasks) =>
+    prevTasks.map((task) =>
+      task.id === selectedTaskID ? updatedTaskData : task
+    ))
+
+  }
 
   return (
     <>
-      <div className="border-bottom border-2 py-2 d-flex gap-1 align-items-center">
-          <p className="fs-heading m-0">Product Roadmap</p>
+      <div className="border-bottom border-2 py-2 align-items-center">
+        <div className="container d-flex gap-1">
+
+          <p className="fs-heading m-0 d-inline-block">Product Roadmap</p>
           
-          <button className="bg-primary-main text-white border-0 fs-btn-heading d-flex flex-row align-items-center" data-bs-toggle="modal" data-bs-target="#AddBoardModal">
+          <button className="d-inline-block bg-primary-main text-white border-0 fs-btn-heading d-flex flex-row align-items-center" data-bs-toggle="modal" data-bs-target="#AddBoardModal">
             <AiOutlinePlus className="text-white" />
             <span>Add New Group</span>
           </button>
+        </div>
       </div>
 
       <div className="d-flex flex-row flex-wrap">
@@ -159,7 +208,9 @@ const TaskApp = () => {
                   key={ task.id }
                   name={ task.name }
                   percentage={ task.progress_percentage }
-                  getID={ () => selectTaskID(task.id, task.name, task.progress_percentage, task.updated_at) }
+                  getID={ () => selectTaskID(task.id, task.name, task.progress_percentage, task.updated_at, task.todo_id, index) }
+                  left={ moveTaskToLeft }
+                  right={ moveTaskToRight }
                 />
               ))}
             </Board>

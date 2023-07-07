@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { createPopper } from '@popperjs/core';
 import PopupOption from "../PopupOption/PopupOption";
 
-const TaskCard = ({ name, percentage, getID }) => {
+const TaskCard = ({ name, percentage, getID, left, right }) => {
   const buttonRef = useRef(null);
   const popoverRef = useRef(null);
   const [isPopoverVisible, setPopoverVisible] = useState(false);
@@ -49,7 +49,7 @@ const TaskCard = ({ name, percentage, getID }) => {
   }, []);
 
   const renderPopoverContent = () => {
-    return <PopupOption />;
+    return <PopupOption moveLeft={ left } moveRight={ right }/>;
   };
 
   return (
