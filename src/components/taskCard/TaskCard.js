@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { createPopper } from '@popperjs/core';
 import PopupOption from "../PopupOption/PopupOption";
 
-const TaskCard = ({ name, percentage }) => {
+const TaskCard = ({ name, percentage, getID }) => {
   const buttonRef = useRef(null);
   const popoverRef = useRef(null);
   const [isPopoverVisible, setPopoverVisible] = useState(false);
@@ -49,7 +49,6 @@ const TaskCard = ({ name, percentage }) => {
   }, []);
 
   const renderPopoverContent = () => {
-    // Replace with your custom React component for popover content
     return <PopupOption />;
   };
 
@@ -59,38 +58,20 @@ const TaskCard = ({ name, percentage }) => {
 
       <div className="status d-flex flex-row align-items-center gap-2 pt-3">
         <div className="progress w-100">
-          <div
-            className={`progress-bar ${percentage === 100 ? 'bg-success' : 'bg-info'}`}
-            style={{ width: `${percentage}%` }}
-            role="progressbar"
-            aria-valuenow={percentage}
-            aria-valuemin="0"
-            aria-valuemax="100"
-          ></div>
+          <div className={`progress-bar ${percentage === 100 ? 'bg-success' : 'bg-info'}`} style={{ width: `${percentage}%` }} role="progressbar" aria-valuenow={percentage} aria-valuemin="0" aria-valuemax="100"></div>
         </div>
-        <p className="m-0">
-          {percentage === 100 ? (
-            <AiFillCheckCircle style={{ fill: 'rgb(25,135,84)' }} />
-          ) : (
-            `${percentage}%`
-          )}
-        </p>
-          <div>
-
-        <button
-          ref={buttonRef}
-          type="button"
-          className="btn btn-lg btn"
-        >
+        
+        <p className="m-0">{percentage === 100 ? (<AiFillCheckCircle style={{ fill: 'rgb(25,135,84)' }} />) : (`${percentage}%`)}</p>
+        
+        <div>
+          <button ref={buttonRef} type="button" className="btn btn-lg btn" onClick={ getID }>
           <BsThreeDots />
-        </button>
-        {isPopoverVisible && (
-          <div ref={popoverRef} className="w-100" style={{ zIndex: 100 }}>
-            {renderPopoverContent()}
-          </div>
-        )}
-          </div>
-
+          </button>{isPopoverVisible && (
+            <div ref={popoverRef} className="w-100" style={{ zIndex: 100 }}>
+              {renderPopoverContent()}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

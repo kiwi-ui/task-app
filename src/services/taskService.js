@@ -6,3 +6,6 @@ export const getTask = () => {
 export const postTask = (newTask) => {
     return AxiosInstance.post('/todos/1/items', newTask)
 };
+export const deleteTask = (task) => {
+    return AxiosInstance.delete('todos/2/items/2', task)
+}

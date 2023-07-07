@@ -12,7 +12,7 @@ const PopupOption = () => {
                     <li className="list-group-item d-flex flex-row gap-3 align-items-center"><AiOutlineArrowRight className='option-icon'/> <span className="option-text">Move Right</span></li>
                     <li className="list-group-item d-flex flex-row gap-3 align-items-center"><AiOutlineArrowLeft className='option-icon'/> <span className="option-text">Move Right</span></li>
                     <li className="list-group-item d-flex flex-row gap-3 align-items-center"><BiEditAlt className='option-icon'/> <span className="option-text">Edit</span></li>
-                    <li className="list-group-item d-flex flex-row gap-3 align-items-center"><RiDeleteBin6Line className='option-icon'/><span className="option-text">Delete</span></li>
+                    <li className="list-group-item d-flex flex-row gap-3 align-items-center" data-bs-toggle="modal" data-bs-target="#DeleteTask"><RiDeleteBin6Line className='option-icon'/><span className="option-text">Delete</span></li>
                 </ul>
             </div>
         </div>
