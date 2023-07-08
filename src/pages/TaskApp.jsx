@@ -185,16 +185,13 @@ const TaskApp = () => {
 
   return (
     <>
-      <div className="border-bottom border-2 py-2 align-items-center">
-        <div className="container d-flex gap-1">
-
-          <p className="fs-heading m-0 d-inline-block">Product Roadmap</p>
+      <div className="border-bottom border-2 py-3 d-flex flex-row gap-2 align-items-center">
+          <p className="fs-heading mb-0" style={{marginLeft: "20px"  }}>Product Roadmap</p>
           
           <button className="d-inline-block bg-primary-main text-white border-0 fs-btn-heading d-flex flex-row align-items-center" data-bs-toggle="modal" data-bs-target="#AddBoardModal">
             <AiOutlinePlus className="text-white" />
             <span>Add New Group</span>
           </button>
-        </div>
       </div>
 
       <div className="d-flex flex-row flex-wrap">
@@ -270,7 +267,7 @@ const TaskApp = () => {
       </div>
       
       {/* ModalAddTask */}
-      <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div className="modal fade" id="ModalAddTask" tabIndex="-1" aria-labelledby="ModalAddTaskLabel" aria-hidden="true">
           <div className="modal-dialog modal-dialog-centered">
               <div className="modal-content">
                   <div className="modal-header border-0">
@@ -325,7 +322,7 @@ const TaskApp = () => {
 
                   <div className="modal-footer border-0">
                       <button type="button" className="border-0 p-2 rounded-1 bg-white fw-semibold border-2 border-black pointer" data-bs-dismiss="modal">Cancel</button>
-                      <button type="button" className={`border-0 p-2 rounded-1 bg-primary-main fw-semibold text-white px-3 ${newTaskName && newTaskProgress ? 'pointer-cursor' : 'pointer-none' }`} onClick={ updateSelectedTask } data-bs-dismiss="modal">Save Task</button>
+                      <button type="button" className={ `border-0 p-2 rounded-1 bg-primary-main fw-semibold text-white px-3 ${newTaskName && newTaskProgress ? 'pointer-cursor' : 'pointer-none' }`} onClick={ updateSelectedTask } data-bs-dismiss="modal">Save Task</button>
                   </div>
               </div>
           </div>

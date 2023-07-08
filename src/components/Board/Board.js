@@ -21,14 +21,14 @@ const Board = ({ title, description, children, getIndex }) => {
   return (
     <div className="board position-relative m-3 p-3 border-1 d-flex flex-column" style={ randomStyle }>
       <div className="container">
-        <p className="p-1 rounded-1 border-1 w-fit" style={randomStyle && { borderStyle: randomStyle.borderStyle , borderColor: randomStyle.borderColor, color: randomStyle.color }}>{ title }</p>
+        <p className="p-1 rounded-1 border-1 w-fit" style={ randomStyle && { borderStyle: randomStyle.borderStyle , borderColor: randomStyle.borderColor, color: randomStyle.color }}>{ title }</p>
         <p className="w-100 text-black fw-bold">{ description }</p>
       </div>
 
       { children }
 
-      <div className='container text-black'>
-        <button className="d-flex align-items-center mt-2 gap-1 rounded-3 border-0 bg-transparent" onClick={ getIndex } data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <div className='text-black'>
+        <button className="d-flex align-items-center mt-2 gap-1 rounded-3 border-0 bg-transparent" onClick={ getIndex } data-bs-toggle="modal" data-bs-target="#ModalAddTask">
           <AiOutlinePlusCircle /> <span>New Task</span>
         </button>
       </div>

@@ -53,27 +53,25 @@ const TaskCard = ({ name, percentage, getID, left, right }) => {
   };
 
   return (
-    <div className="task p-3 text-black my-1">
+    <div className="task p-3 text-black my-2 position-relative">
       <p className="fw-bold">{ name }</p>
 
-      <div className="status d-flex flex-row align-items-center gap-2 pt-3">
+      <div className="status d-flex flex-row align-items-center gap-4 pt-3">
         <div className="progress w-100">
           <div className={ `progress-bar ${ percentage === 100 ? 'bg-success' : 'bg-info'}` } style={{ width: `${ percentage }%` }} role="progressbar" aria-valuenow={percentage} aria-valuemin="0" aria-valuemax="100"></div>
         </div>
         
         <p className="m-0">{ percentage === 100 ? (<AiFillCheckCircle style={{ fill: 'rgb(25,135,84)' }} />) : (`${ percentage }%`) }</p>
         
-        <div>
-          <button ref={ buttonRef } type="button" className="btn btn-lg btn" onClick={ getID }>
+          <button ref={ buttonRef } type="button" className="btn" onClick={ getID }>
             <BsThreeDots />
           </button>
           
           { isPopoverVisible && (
-            <div ref={popoverRef} className="w-100" style={{ zIndex: 100 }}>
+            <div ref={popoverRef} className="position-absolute w-100 top-100" style={{ zIndex: 100, left: '85%' }}>
               {renderPopoverContent()}
             </div>
           ) }
-        </div>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import './index.css'
 const PopupOption = ({ moveLeft, moveRight }) => {
   return (
     <>
-        <div className='rounded-3 position-absolute w-50' style={{zIndex: 10}}>
+        <div className='rounded-3 w-75' style={{zIndex: 10}}>
             <div className='container'>
                 <ul className="list-group bg-white">
                     <li className="list-group-item d-flex flex-row gap-3 align-items-center" onClick={ moveRight }><AiOutlineArrowRight className='option-icon'/> <span className="option-text">Move Right</span></li>
