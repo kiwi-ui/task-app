@@ -12,7 +12,7 @@ const Board = ({ title, description, children, getIndex }) => {
     const borderStyle = 'solid';
     const color = `rgba(${r}, ${g}, ${b})`;
     
-    return { backgroundColor: `rgba(${r}, ${g}, ${b}, 0.2)`, borderColor, borderStyle, color };
+    return { backgroundColor: `rgba(${r}, ${g}, ${b}, 0.1)`, borderColor, borderStyle, color };
   };
   
   useEffect(() => {
