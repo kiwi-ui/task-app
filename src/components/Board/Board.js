@@ -19,9 +19,9 @@ const Board = ({ title, description, children, getIndex }) => {
     setRandomStyle(getRandomColor());
   }, []);
   return (
-    <div className="board position-relative m-3 px-3 py-4 border-1 d-flex flex-column" style={ randomStyle }>
+    <div className="board position-relative m-3 p-3 border-1 d-flex flex-column" style={ randomStyle }>
       <div className="container">
-        <p className="p-1 rounded-1 border-1 w-fit" style={ randomStyle }>{ title }</p>
+        <p className="p-1 rounded-1 border-1 w-fit" style={randomStyle && { borderStyle: randomStyle.borderStyle , borderColor: randomStyle.borderColor, color: randomStyle.color }}>{ title }</p>
         <p className="w-100 text-black fw-bold">{ description }</p>
       </div>
 
