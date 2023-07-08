@@ -29,7 +29,6 @@ const TaskApp = () => {
       const { data } = await getBoard();
       const aFewBoard = data.slice(0, 3)
       setBoards(aFewBoard);
-      console.log(aFewBoard)
     } catch (error) {
       console.error(error);
     }

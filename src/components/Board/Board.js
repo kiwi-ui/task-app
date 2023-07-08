@@ -21,7 +21,7 @@ const Board = ({ title, description, children, getIndex }) => {
   return (
     <div className="board position-relative m-3 p-3 border-1 d-flex flex-column" style={ randomStyle }>
       <div className="container">
-        <p className="p-1 rounded-1 border-1 w-fit" style={ randomStyle && { borderStyle: randomStyle.borderStyle , borderColor: randomStyle.borderColor, color: randomStyle.color }}>{ title }</p>
+        <p className="px-2 py-1 rounded-1 border-1 w-fit" style={ randomStyle && { borderStyle: randomStyle.borderStyle , borderColor: randomStyle.borderColor, color: randomStyle.color }}>{ title }</p>
         <p className="w-100 text-black fw-bold">{ description }</p>
       </div>
 
